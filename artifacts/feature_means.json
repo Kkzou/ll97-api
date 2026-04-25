@@ -1,0 +1,11 @@
+{
+  "sqft": 89734.34463276836,
+  "log_sqft": 10.763706693726618,
+  "building_age": 55.29127432517263,
+  "numberoffloors": 3.6150341685649203,
+  "airTemperature_winter": 6.466829869978657,
+  "airTemperature_summer": 24.065525423013185,
+  "dewTemperature_winter": 0.328732565490207,
+  "dewTemperature_summer": 16.156921577966102,
+  "seasonal_temp_gap": 17.598695553034528
+}

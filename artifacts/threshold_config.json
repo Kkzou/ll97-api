@@ -1,0 +1,9 @@
+{
+  "method": "threshold_tuning",
+  "high_threshold": null,
+  "stage1_threshold": null,
+  "high_idx": 0,
+  "low_idx": 1,
+  "medium_idx": 2,
+  "best_method": "C. XGB asymmetric (thresh=0.20)"
+}
