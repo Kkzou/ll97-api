@@ -1,9 +1,7 @@
 {
-  "method": "threshold_tuning",
-  "high_threshold": null,
-  "stage1_threshold": null,
+  "method": "argmax",
+  "best_method": "Neural Network (MLPClassifier 64-32-16)",
   "high_idx": 0,
   "low_idx": 1,
-  "medium_idx": 2,
-  "best_method": "C. XGB asymmetric (thresh=0.20)"
+  "medium_idx": 2
 }
