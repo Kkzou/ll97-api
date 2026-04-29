@@ -230,10 +230,23 @@ def predict(b: BuildingInput):
         X = SCALER.transform(X)
 
         proba = MODEL.predict_proba(X)[0]
-        pred_idx = int(np.argmax(proba))
+
+        # ─── Asymmetric threshold for high-class detection ───
+        # If P(high) >= 0.30, override argmax and predict high.
+        # This biases toward catching high-risk buildings (lower
+        # false negative rate) at the cost of some precision —
+        # the right trade-off for a compliance screening tool.
+        HIGH_THRESHOLD = 0.30
+        classes  = list(LE.classes_)
+        high_idx = classes.index("high")
+
+        if proba[high_idx] >= HIGH_THRESHOLD:
+            pred_idx = high_idx
+        else:
+            pred_idx = int(np.argmax(proba))
+
         risk = LE.inverse_transform([pred_idx])[0]
 
-        classes = list(LE.classes_)
         proba_dict = {c: round(float(proba[i]), 4) for i, c in enumerate(classes)}
 
         return {
@@ -245,7 +258,7 @@ def predict(b: BuildingInput):
             "estimated_ghg_intensity": None,
             "estimated_annual_emissions": None,
             "estimated_annual_penalty_usd": None,
-            "note": "Classification only. For exact emissions and penalty estimates, provide your annual energy bills.",
+            "note": "Classification with asymmetric threshold (P(high) ≥ 0.30 → high). For exact emissions and penalty estimates, provide your annual energy bills.",
         }
 
     except HTTPException:
